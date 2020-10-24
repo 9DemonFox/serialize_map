@@ -1,4 +1,5 @@
-#include "serialization.h"
+// #include "serialization.h"
+#include "serializeToFiles.h"
 #include <map>
 #include <vector>
 using namespace stl_serialization;
@@ -26,10 +27,11 @@ int main(int argc, char *argv[])
         }
         ms_src[i]=temp;
     }
-    ms_src.serialization(_ost); //  oa  << _ost
+    ms_src.serialization(_ost,"test.bin"); //  oa  << _ost
     MapSerialization<int, vector<int>> ms_des;
-    std::istringstream ist(_ost.str());
-    ms_des.unserialization(ist);
+    std::istringstream ist(_ost.str());// initial from _ost
+    // ms_des.unserialization(ist);
+    ms_des.unserialization("test.bin");
     for (std::map<int, vector<int>>::iterator it = ms_des.begin(); it != ms_des.end(); it++)
     {
         int k = it->first;
